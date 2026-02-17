@@ -10,13 +10,15 @@ export default function Register() {
     email: "",
     password: "",
     institutionalCode: "",
-    career: ""
+    career: "",
+    acceptTerms: false
   })
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target as HTMLInputElement;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
     })
   }
 
@@ -26,6 +28,10 @@ export default function Register() {
       console.log("Iniciando sesión con:", formData.email)
       alert("¡Inicio de sesión exitoso!")
     } else {
+      if (!formData.acceptTerms) {
+        alert("Debes aceptar la política de tratamiento de datos para continuar.")
+        return
+      }
       console.log("Registrando usuario:", { role, ...formData })
       alert("¡Cuenta creada exitosamente!")
     }
@@ -178,6 +184,22 @@ export default function Register() {
                     </div>
                   </div>
                 )}
+              </div>
+            )}
+
+            {!isLogin && (
+              <div className="form-group checkbox-group fade-in">
+                <input
+                  type="checkbox"
+                  id="acceptTerms"
+                  name="acceptTerms"
+                  required
+                  checked={formData.acceptTerms}
+                  onChange={handleInputChange}
+                />
+                <label htmlFor="acceptTerms">
+                  Acepto la <a href="#politica" onClick={(e) => { e.preventDefault(); alert("Política de Tratamiento de Datos: Sus datos serán usados exclusivamente para fines académicos y de gestión del CONIITI 2026 de acuerdo con la Ley 1581 de 2012.") }}>política de tratamiento de datos personales</a> y términos y condiciones.
+                </label>
               </div>
             )}
 
