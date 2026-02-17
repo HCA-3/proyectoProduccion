@@ -866,3 +866,11 @@ footer {
 .add-guest-form textarea { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd; font-family: inherit; margin-bottom: 1rem; }
 .btn-save-guest { background: #375fe4; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
 .btn-save-guest:hover { background: #1448f0; }
+
+/* Estilos para Carga de Archivos y Papelera */
+.file-upload-wrapper { display: flex; align-items: center; gap: 1rem; background: #fff; padding: 10px; border-radius: 8px; border: 1px dashed #375fe4; }
+.upload-preview { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid #375fe4; }
+.modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+.modal-content { background: white; padding: 2rem; border-radius: 15px; width: 500px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+.modal-actions { display: flex; gap: 1rem; margin-top: 1.5rem; }
+.btn-restore { background: #2ecc71; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; }

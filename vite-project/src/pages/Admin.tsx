@@ -22,10 +22,37 @@ export default function Admin() {
         }
     }, [navigate])
 
+    const [deletedConferences, setDeletedConferences] = useState<any[]>([])
+    const [editingConf, setEditingConf] = useState<any | null>(null)
+
     const handleDeleteConference = (id: string) => {
-        if (confirm("¿Estás seguro de eliminar esta conferencia?")) {
-            setConferences(conferences.filter(c => c.id !== id))
+        if (confirm("¿Estás seguro de mover esta conferencia a la papelera?")) {
+            const confToDelete = conferences.find(c => c.id === id)
+            if (confToDelete) {
+                setDeletedConferences([...deletedConferences, confToDelete])
+                setConferences(conferences.filter(c => c.id !== id))
+            }
         }
+    }
+
+    const handleRestoreConference = (id: string) => {
+        const confToRestore = deletedConferences.find(c => c.id === id)
+        if (confToRestore) {
+            setConferences([...conferences, confToRestore])
+            setDeletedConferences(deletedConferences.filter(c => c.id !== id))
+            alert("Conferencia restaurada")
+        }
+    }
+
+    const handleEditConference = (conf: any) => {
+        setEditingConf({ ...conf })
+    }
+
+    const handleSaveEdit = (e: React.FormEvent) => {
+        e.preventDefault()
+        setConferences(conferences.map(c => c.id === editingConf.id ? editingConf : c))
+        setEditingConf(null)
+        alert("Cambios guardados correctamente")
     }
 
     const [showGuestForm, setShowGuestForm] = useState(false)
@@ -36,18 +63,27 @@ export default function Admin() {
         avatar: ""
     })
 
+    const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (file) {
+            const reader = new FileReader()
+            reader.onloadend = () => {
+                setNewGuest({ ...newGuest, avatar: reader.result as string })
+            }
+            reader.readAsDataURL(file)
+        }
+    }
+
     const handleAddGuest = (e: React.FormEvent) => {
         e.preventDefault()
-        // En una app real, esto sería un POST a una API
-        // Aquí simulamos añadiendo un nuevo objeto a la estructura
-        const newId = (conferences.length + 1).toString()
+        const newId = (conferences.length + deletedConferences.length + 1).toString()
         const simulatedConf = {
             id: newId,
             title: `Conferencia de ${newGuest.name}`,
             description: newGuest.bio,
             startTime: new Date().toISOString(),
             endTime: new Date().toISOString(),
-            location: "TBD",
+            location: "Pendiente",
             category: "General",
             level: "Básico",
             speaker: { ...newGuest }
@@ -55,7 +91,7 @@ export default function Admin() {
         setConferences([...conferences, simulatedConf])
         setShowGuestForm(false)
         setNewGuest({ name: "", organization: "", bio: "", avatar: "" })
-        alert("¡Nuevo invitado añadido exitosamente!")
+        alert("¡Invitado y foto cargados exitosamente!")
     }
 
     if (!userRole) return <div className="loading">Cargando panel...</div>
@@ -80,6 +116,12 @@ export default function Admin() {
                         onClick={() => setActiveTab("guests")}
                     >
                         👥 Listado de Invitados
+                    </button>
+                    <button
+                        className={activeTab === "trash" ? "active" : ""}
+                        onClick={() => setActiveTab("trash")}
+                    >
+                        🗑️ Papelera
                     </button>
                     {userRole === "SUPER_ADMIN" && (
                         <button
@@ -114,8 +156,8 @@ export default function Admin() {
                                             <td>{conf.speaker.name}</td>
                                             <td>{conf.location}</td>
                                             <td className="actions">
-                                                <button className="btn-edit-sm">✏️</button>
-                                                <button className="btn-delete-sm" onClick={() => handleDeleteConference(conf.id)}>🗑️</button>
+                                                <button className="btn-edit-sm" onClick={() => handleEditConference(conf)}>✏️ Editar</button>
+                                                <button className="btn-delete-sm" onClick={() => handleDeleteConference(conf.id)}>🗑️ Borrar</button>
                                             </td>
                                         </tr>
                                     ))}
@@ -158,13 +200,18 @@ export default function Admin() {
                                         </div>
                                     </div>
                                     <div className="form-group">
-                                        <label>URL de la Foto</label>
-                                        <input
-                                            type="text"
-                                            placeholder="https://... (deja vacío para avatar por defecto)"
-                                            value={newGuest.avatar}
-                                            onChange={(e) => setNewGuest({ ...newGuest, avatar: e.target.value || "/default-avatar.png" })}
-                                        />
+                                        <label>Foto del Invitado (Cargar desde dispositivo)</label>
+                                        <div className="file-upload-wrapper">
+                                            <input
+                                                type="file"
+                                                accept="image/*"
+                                                onChange={handleFileUpload}
+                                                className="file-input"
+                                            />
+                                            {newGuest.avatar && (
+                                                <img src={newGuest.avatar} alt="Preview" className="upload-preview" />
+                                            )}
+                                        </div>
                                     </div>
                                     <div className="form-group">
                                         <label>Bio / Perfil Profesional</label>
@@ -270,6 +317,80 @@ export default function Admin() {
                                     Guardar Cambios Globales
                                 </button>
                             </form>
+                        </div>
+                    )}
+
+                    {activeTab === "trash" && (
+                        <div className="admin-view">
+                            <div className="view-header">
+                                <h2>Papelera de Reciclaje</h2>
+                            </div>
+                            {deletedConferences.length === 0 ? (
+                                <div className="no-data">La papelera está vacía</div>
+                            ) : (
+                                <table className="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Título</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {deletedConferences.map(conf => (
+                                            <tr key={conf.id}>
+                                                <td>{conf.title}</td>
+                                                <td className="actions">
+                                                    <button
+                                                        className="btn-edit-sm"
+                                                        onClick={() => handleRestoreConference(conf.id)}
+                                                    >
+                                                        🔄 Restaurar
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            )}
+                        </div>
+                    )}
+
+                    {/* Modal de Edición de Conferencia */}
+                    {editingConf && (
+                        <div className="modal-overlay fade-in">
+                            <div className="modal-content">
+                                <h3>Editar Conferencia</h3>
+                                <form onSubmit={handleSaveEdit}>
+                                    <div className="form-group">
+                                        <label>Título</label>
+                                        <input
+                                            type="text"
+                                            value={editingConf.title}
+                                            onChange={e => setEditingConf({ ...editingConf, title: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Ubicación</label>
+                                        <input
+                                            type="text"
+                                            value={editingConf.location}
+                                            onChange={e => setEditingConf({ ...editingConf, location: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Descripción</label>
+                                        <textarea
+                                            rows={4}
+                                            value={editingConf.description}
+                                            onChange={e => setEditingConf({ ...editingConf, description: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className="modal-actions">
+                                        <button type="submit" className="btn-submit">Guardar Cambios</button>
+                                        <button type="button" className="btn-logout" onClick={() => setEditingConf(null)}>Cancelar</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     )}
                 </main>
