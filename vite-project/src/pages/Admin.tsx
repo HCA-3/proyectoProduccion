@@ -142,6 +142,41 @@ export default function Admin() {
                                     </select>
                                 </div>
                                 <div className="form-group">
+                                    <label>Imagen de Banner (Cabecera)</label>
+                                    <div className="banner-edit-zone">
+                                        <input
+                                            type="text"
+                                            placeholder="URL de la imagen (ej: https://...)"
+                                            defaultValue={localStorage.getItem("site_banner") || "/banner-header.png"}
+                                            id="bannerInput"
+                                        />
+                                        <div className="banner-actions">
+                                            <button
+                                                type="button"
+                                                className="btn-update-img"
+                                                onClick={() => {
+                                                    const val = (document.getElementById('bannerInput') as HTMLInputElement).value;
+                                                    localStorage.setItem("site_banner", val);
+                                                    alert("Banner actualizado. Recarga la página para ver los cambios.");
+                                                }}
+                                            >
+                                                Actualizar Foto
+                                            </button>
+                                            <button
+                                                type="button"
+                                                className="btn-remove-img"
+                                                onClick={() => {
+                                                    localStorage.setItem("site_banner", "");
+                                                    (document.getElementById('bannerInput') as HTMLInputElement).value = "";
+                                                    alert("Banner eliminado.");
+                                                }}
+                                            >
+                                                Quitar Foto
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="form-group">
                                     <label>Modo de Mantenimiento</label>
                                     <input type="checkbox" />
                                 </div>

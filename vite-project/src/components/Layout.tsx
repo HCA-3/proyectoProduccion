@@ -9,6 +9,8 @@ export default function Layout({ children }: Props) {
   const [user, setUser] = useState<any>(null)
   const navigate = useNavigate()
 
+  const [bannerUrl, setBannerUrl] = useState("/banner-header.png")
+
   // Simulación de verificación de sesión (se activa al recargar o navegar)
   useEffect(() => {
     const session = localStorage.getItem("user_session")
@@ -23,6 +25,10 @@ export default function Layout({ children }: Props) {
     } else {
       document.body.className = ""
     }
+
+    // Cargar banner persistente
+    const savedBanner = localStorage.getItem("site_banner")
+    if (savedBanner) setBannerUrl(savedBanner)
   }, [])
 
   const handleLogout = () => {
@@ -36,11 +42,13 @@ export default function Layout({ children }: Props) {
   return (
     <>
       <header>
-        <img
-          className="header-banner"
-          src="/banner-header.png"
-          alt="Banner bandera de italia"
-        />
+        {bannerUrl && (
+          <img
+            className="header-banner"
+            src={bannerUrl}
+            alt="Banner Cabecera"
+          />
+        )}
 
         <div className="logo-container">
           <img

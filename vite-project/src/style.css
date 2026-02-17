@@ -857,3 +857,7 @@ footer {
   font-weight: 700;
   color: var(--secondary-color);
 }
+.banner-edit-zone input { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 10px; }
+.banner-actions { display: flex; gap: 10px; }
+.btn-update-img { background: #375fe4; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; }
+.btn-remove-img { background: #fff; color: #e74c3c; border: 1px solid #e74c3c; padding: 8px 15px; border-radius: 6px; cursor: pointer; }
