@@ -249,3 +249,123 @@ footer {
 
 /* Desktop grande */
 @media (min-width: 1280px) {}
+
+/* Registro de Usuario */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 1.5rem;
+  background-image: url('/circuit-bg.png');
+  background-size: cover;
+  min-height: calc(100vh - 150px);
+}
+
+.register-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.register-card h2 {
+  color: #1f2a44;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+}
+
+.register-card p {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.role-selector {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.role-selector button {
+  padding: 10px 20px;
+  border: 2px solid #eee;
+  background: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  color: #666;
+}
+
+.role-selector button.active {
+  border-color: #375fe4;
+  background: #375fe4;
+  color: white;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #1f2a44;
+}
+
+.form-group input, 
+.form-group select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #375fe4;
+  box-shadow: 0 0 0 3px rgba(55, 95, 228, 0.1);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.btn-submit {
+  width: 100%;
+  background: linear-gradient(90deg, #375fe4, #1f2a44);
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(31, 42, 68, 0.2);
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
