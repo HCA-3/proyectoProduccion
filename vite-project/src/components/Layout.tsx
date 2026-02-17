@@ -70,7 +70,7 @@ export default function Layout({ children }: Props) {
             {user ? (
               <div className="user-profile-menu">
                 {(user.role === "SUPER_ADMIN" || user.role === "CONTENT_MANAGER") && (
-                  <Link to="/admin" className="btn-admin-pill">Panel Admin</Link>
+                  <Link to="/admin" className="btn-management">Gestión de Evento</Link>
                 )}
                 <Link to="/perfil" className="btn-profile">Mi Perfil</Link>
                 <button onClick={handleLogout} className="btn-logout">Cerrar Sesión</button>

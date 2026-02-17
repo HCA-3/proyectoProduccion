@@ -33,8 +33,8 @@ export default function Admin() {
     return (
         <div className="admin-container fade-in">
             <div className="admin-header">
-                <h1>Panel de Administración</h1>
-                <p className="role-badge">{userRole === "SUPER_ADMIN" ? "Super Usuario 1: Control Total" : "Super Usuario 2: Gestor de Contenido"}</p>
+                <h1>Panel de Gestión Superior</h1>
+                <p className="role-badge">{userRole === "SUPER_ADMIN" ? "Super Usuario 1: Acceso Total" : "Super Usuario 2: Gestión de Contenido"}</p>
             </div>
 
             <div className="admin-grid">
@@ -43,20 +43,20 @@ export default function Admin() {
                         className={activeTab === "conferences" ? "active" : ""}
                         onClick={() => setActiveTab("conferences")}
                     >
-                        📋 Gestionar Conferencias
+                        📋 Agenda de Conferencias
                     </button>
                     <button
                         className={activeTab === "guests" ? "active" : ""}
                         onClick={() => setActiveTab("guests")}
                     >
-                        👥 Gestionar Invitados
+                        👥 Listado de Invitados
                     </button>
                     {userRole === "SUPER_ADMIN" && (
                         <button
                             className={activeTab === "settings" ? "active" : ""}
                             onClick={() => setActiveTab("settings")}
                         >
-                            ⚙️ Configuración Global
+                            ⚙️ Configuración de Página
                         </button>
                     )}
                 </aside>
@@ -65,15 +65,15 @@ export default function Admin() {
                     {activeTab === "conferences" && (
                         <div className="admin-view">
                             <div className="view-header">
-                                <h2>Listado de Conferencias</h2>
-                                <button className="btn-add">+ Crear Nueva Conferencia</button>
+                                <h2>Control de Conferencias</h2>
+                                <button className="btn-add">+ Añadir Nueva</button>
                             </div>
                             <table className="admin-table">
                                 <thead>
                                     <tr>
                                         <th>Título</th>
                                         <th>Ponente</th>
-                                        <th>Lugar</th>
+                                        <th>Ubicación</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -84,7 +84,7 @@ export default function Admin() {
                                             <td>{conf.speaker.name}</td>
                                             <td>{conf.location}</td>
                                             <td className="actions">
-                                                <button className="btn-edit-sm">✏️ Editar</button>
+                                                <button className="btn-edit-sm">✏️</button>
                                                 <button className="btn-delete-sm" onClick={() => handleDeleteConference(conf.id)}>🗑️</button>
                                             </td>
                                         </tr>
@@ -97,8 +97,8 @@ export default function Admin() {
                     {activeTab === "guests" && (
                         <div className="admin-view">
                             <div className="view-header">
-                                <h2>Gestión de Invitados / Ponentes</h2>
-                                <button className="btn-add">+ Añadir Invitado</button>
+                                <h2>Gestión de Invitados</h2>
+                                <button className="btn-add">+ Nuevo Invitado</button>
                             </div>
                             <div className="guests-grid">
                                 {conferences.map(conf => (
@@ -108,7 +108,7 @@ export default function Admin() {
                                             <h4>{conf.speaker.name}</h4>
                                             <p>{conf.speaker.organization}</p>
                                         </div>
-                                        <button className="btn-edit-sm">Editar Perfil</button>
+                                        <button className="btn-edit-sm">Editar Datos</button>
                                     </div>
                                 ))}
                             </div>

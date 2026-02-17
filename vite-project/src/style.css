@@ -820,19 +820,40 @@ footer {
   margin-bottom: 1rem;
 }
 
-/* Botón Admin en Header */
-.btn-admin-pill {
-  background: #ffc107;
-  color: #000;
+/* Botón de Gestión en Header (Discreto) */
+.btn-management {
+  background: #f8f9fa;
+  color: #1f2a44;
   padding: 8px 16px;
-  border-radius: 50px;
+  border-radius: 8px;
   text-decoration: none;
-  font-weight: 800;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  margin-right: 0.5rem;
-  border: 2px solid #000;
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-right: 0.8rem;
+  border: 1px solid #ddd;
+  transition: all 0.2s ease;
 }
-.theme-select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; background: #f9f9f9; }
-.settings-form .form-group { margin-bottom: 2rem; }
-.settings-form label { display: block; margin-bottom: 0.8rem; font-weight: 700; color: var(--secondary-color); }
+
+.btn-management:hover {
+  background: #ececec;
+  border-color: #bbb;
+}
+
+.theme-select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+}
+
+.settings-form .form-group {
+  margin-bottom: 2rem;
+}
+
+.settings-form label {
+  display: block;
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+}

@@ -45,7 +45,7 @@ export default function Register() {
         fullName: name
       }))
 
-      alert(role !== "USER" ? `¡Bienvenido Administrador: ${name}!` : "¡Inicio de sesión exitoso!")
+      alert(`¡Bienvenido de nuevo, ${name}!`)
       window.location.href = role !== "USER" ? "/admin" : "/"
     } else {
       if (!formData.acceptTerms) {
