@@ -26,14 +26,18 @@ export default function Register() {
     e.preventDefault()
     if (isLogin) {
       console.log("Iniciando sesión con:", formData.email)
+      localStorage.setItem("user_session", JSON.stringify({ email: formData.email }))
       alert("¡Inicio de sesión exitoso!")
+      window.location.href = "/" // Redirigir y recargar para actualizar Layout
     } else {
       if (!formData.acceptTerms) {
         alert("Debes aceptar la política de tratamiento de datos para continuar.")
         return
       }
       console.log("Registrando usuario:", { role, ...formData })
+      localStorage.setItem("user_session", JSON.stringify({ email: formData.email, fullName: formData.fullName }))
       alert("¡Cuenta creada exitosamente!")
+      window.location.href = "/perfil" // Redirigir y recargar
     }
   }
 
