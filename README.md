@@ -30,3 +30,8 @@ Base de datos:
   - Formulario inteligente que muestra campos específicos (como código institucional y carrera) solo para estudiantes.
   - Validación básica de campos obligatorios y diseño responsivo premium con Glassmorphism.
 - **Infraestructura**: Configuración de Git con Personal Access Token y estandarización de comandos para ejecución en entornos restringidos.
+
+
+admin: 
+Super Usuario 1: superadmin@coniiti.com / super123
+Super Usuario 2: admin@coniiti.com / admin12 

@@ -34,7 +34,7 @@ export default function Register() {
       if (formData.email === "superadmin@coniiti.com" && formData.password === "super123") {
         role = "SUPER_ADMIN"
         name = "Super Admin"
-      } else if (formData.email === "manager@coniiti.com" && formData.password === "manager123") {
+      } else if (formData.email === "admin@coniiti.com" && formData.password === "admin12") {
         role = "CONTENT_MANAGER"
         name = "Gestor"
       }
