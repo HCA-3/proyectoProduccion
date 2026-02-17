@@ -572,6 +572,15 @@ footer {
   color: white;
 }
 
+.no-data {
+  text-align: center;
+  color: #999;
+  padding: 2rem;
+  font-style: italic;
+  border: 1px dashed #ddd;
+  border-radius: 12px;
+}
+
 @media (max-width: 900px) {
   .profile-grid {
     grid-template-columns: 1fr;

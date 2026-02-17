@@ -11,8 +11,8 @@ export default function Profile() {
         career: "Ingeniería de Sistemas"
     })
 
-    // Datos simulados de conferencias inscritas
-    const registeredConferences = [
+    // Estado para las conferencias inscritas
+    const [conferences, setConferences] = useState([
         {
             id: 1,
             title: "Inteligencia Artificial en la Industria 4.0",
@@ -27,11 +27,17 @@ export default function Profile() {
             time: "02:00 PM",
             location: "Sala de Conferencias B"
         }
-    ]
+    ])
 
     const handleSave = () => {
         setIsEditing(false)
         alert("Datos actualizados correctamente")
+    }
+
+    const handleCancel = (id: number) => {
+        if (confirm("¿Estás seguro de que deseas cancelar tu inscripción a esta conferencia?")) {
+            setConferences(conferences.filter(conf => conf.id !== id))
+        }
     }
 
     return (
@@ -114,17 +120,26 @@ export default function Profile() {
                 <div className="profile-card user-conferences">
                     <h3>Mis Conferencias Inscritas</h3>
                     <div className="conference-mini-list">
-                        {registeredConferences.map(conf => (
-                            <div key={conf.id} className="conference-mini-card">
-                                <div className="conf-icon">📅</div>
-                                <div className="conf-details">
-                                    <h4>{conf.title}</h4>
-                                    <p>{conf.date} | {conf.time}</p>
-                                    <p className="location">📍 {conf.location}</p>
+                        {conferences.length > 0 ? (
+                            conferences.map(conf => (
+                                <div key={conf.id} className="conference-mini-card">
+                                    <div className="conf-icon">📅</div>
+                                    <div className="conf-details">
+                                        <h4>{conf.title}</h4>
+                                        <p>{conf.date} | {conf.time}</p>
+                                        <p className="location">📍 {conf.location}</p>
+                                    </div>
+                                    <button
+                                        className="btn-cancel"
+                                        onClick={() => handleCancel(conf.id)}
+                                    >
+                                        Cancelar
+                                    </button>
                                 </div>
-                                <button className="btn-cancel">Cancelar</button>
-                            </div>
-                        ))}
+                            ))
+                        ) : (
+                            <p className="no-data">No tienes conferencias inscritas actualmente.</p>
+                        )}
                     </div>
                 </div>
             </div>
