@@ -48,6 +48,41 @@ export default function Admin() {
         setEditingConf({ ...conf })
     }
 
+    const [showConfForm, setShowConfForm] = useState(false)
+    const [newConf, setNewConf] = useState({
+        title: "",
+        location: "",
+        description: "",
+        speakerName: "",
+        startTime: "",
+        endTime: ""
+    })
+
+    const handleAddConference = (e: React.FormEvent) => {
+        e.preventDefault()
+        const newId = (conferences.length + deletedConferences.length + 1).toString()
+        const simulatedConf = {
+            id: newId,
+            title: newConf.title,
+            description: newConf.description,
+            startTime: newConf.startTime || new Date().toISOString(),
+            endTime: newConf.endTime || new Date().toISOString(),
+            location: newConf.location,
+            category: "General",
+            level: "Básico",
+            speaker: {
+                name: newConf.speakerName,
+                organization: "Por definir",
+                bio: "",
+                avatar: "/default-avatar.png"
+            }
+        }
+        setConferences([...conferences, simulatedConf])
+        setShowConfForm(false)
+        setNewConf({ title: "", location: "", description: "", speakerName: "", startTime: "", endTime: "" })
+        alert("¡Conferencia agendada exitosamente!")
+    }
+
     const handleSaveEdit = (e: React.FormEvent) => {
         e.preventDefault()
         setConferences(conferences.map(c => c.id === editingConf.id ? editingConf : c))
@@ -138,8 +173,58 @@ export default function Admin() {
                         <div className="admin-view">
                             <div className="view-header">
                                 <h2>Control de Conferencias</h2>
-                                <button className="btn-add">+ Añadir Nueva</button>
+                                <button
+                                    className="btn-add"
+                                    onClick={() => setShowConfForm(!showConfForm)}
+                                >
+                                    {showConfForm ? "Cerrar Formulario" : "+ Añadir Nueva"}
+                                </button>
                             </div>
+
+                            {showConfForm && (
+                                <form className="add-guest-form fade-in" onSubmit={handleAddConference}>
+                                    <div className="form-group">
+                                        <label>Título de la Conferencia</label>
+                                        <input
+                                            type="text"
+                                            required
+                                            value={newConf.title}
+                                            onChange={e => setNewConf({ ...newConf, title: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className="form-row">
+                                        <div className="form-group">
+                                            <label>Nombre del Ponente</label>
+                                            <input
+                                                type="text"
+                                                required
+                                                value={newConf.speakerName}
+                                                onChange={e => setNewConf({ ...newConf, speakerName: e.target.value })}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label>Ubicación (Salón / Auditorio)</label>
+                                            <input
+                                                type="text"
+                                                required
+                                                value={newConf.location}
+                                                onChange={e => setNewConf({ ...newConf, location: e.target.value })}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Descripción / Resumen</label>
+                                        <textarea
+                                            rows={3}
+                                            required
+                                            value={newConf.description}
+                                            onChange={e => setNewConf({ ...newConf, description: e.target.value })}
+                                        ></textarea>
+                                    </div>
+                                    <button type="submit" className="btn-save-guest">Publicar Conferencia</button>
+                                </form>
+                            )}
+
                             <table className="admin-table">
                                 <thead>
                                     <tr>
