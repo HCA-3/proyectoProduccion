@@ -3,12 +3,16 @@
 body {
   font-family: 'Open Sans', sans-serif;
 }
-h1, h2, h3 {
+
+h1,
+h2,
+h3 {
   font-family: 'Montserrat', sans-serif;
 }
 
 :root {
-  font-family: 'Open Sans', sans-serif;;
+  font-family: 'Open Sans', sans-serif;
+  ;
   line-height: 1.5;
   font-weight: 400;
 
@@ -63,7 +67,7 @@ header {
   width: clamp(20px, 80vw, 200px);
 }
 
-.navbar{
+.navbar {
   grid-row: 2 / 3;
   grid-column: 2 / 3;
   display: flex;
@@ -81,7 +85,7 @@ header {
 
 .navbar-links a {
   text-decoration: none;
-  position: relative; 
+  position: relative;
   text-decoration: none;
   color: #1f2a44;
   font-weight: 700;
@@ -105,21 +109,22 @@ header {
 .navbar-links a:hover::after {
   transform: scaleX(1);
 }
+
 .main-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
 
-.invitados{
+.invitados {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-size: cover;        
-  background-position: center;  
-  background-repeat: no-repeat;  
-  min-height: 400px;      
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 400px;
 }
 
 .card {
@@ -146,34 +151,101 @@ header {
   border-radius: 12px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
 }
 
 .btn:hover {
   transform: scale(1.05);
   background: linear-gradient(90deg, #1448f0, #4663e5);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-footer{
+.btn-registered {
+  background: linear-gradient(90deg, #2ecc71, #27ae60);
+}
+
+.btn-registered:hover {
+  background: linear-gradient(90deg, #27ae60, #219150);
+}
+
+.card.registered {
+  border: 1px solid #2ecc71;
+  background-color: rgba(46, 204, 113, 0.05);
+}
+
+.info {
+  margin: 1rem 0;
+  text-align: left;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.info p {
+  margin-bottom: 0.5rem;
+}
+
+/* Efectos para el botón de inscripción */
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.9;
+  transform: none !important;
+}
+
+.btn-loading {
+  background: #95a5a6 !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-loading::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: loading-shimmer 1s infinite;
+}
+
+@keyframes loading-shimmer {
+  100% {
+    left: 100%;
+  }
+}
+
+.btn-registered {
+  animation: pop-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes pop-in {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+footer {
   display: flex;
   align-items: end;
   justify-content: center;
+  margin-top: 3rem;
+  padding: 2rem;
+  border-top: 1px solid #eee;
 }
 
 
 /* Tablets */
-@media (min-width: 768px) {
-
-}
+@media (min-width: 768px) {}
 
 /* Laptops */
-@media (min-width: 1024px) {
-
-}
+@media (min-width: 1024px) {}
 
 /* Desktop grande */
-@media (min-width: 1280px) {
-
-}
+@media (min-width: 1280px) {}
