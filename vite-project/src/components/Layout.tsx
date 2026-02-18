@@ -10,6 +10,8 @@ export default function Layout({ children }: Props) {
   const navigate = useNavigate()
 
   const [bannerUrl, setBannerUrl] = useState("/banner-header.png")
+  const [logoUni, setLogoUni] = useState("/ucatolica-logo.png")
+  const [logoEvento, setLogoEvento] = useState("/logo-coniiti.png")
 
   // Simulación de verificación de sesión (se activa al recargar o navegar)
   useEffect(() => {
@@ -29,6 +31,13 @@ export default function Layout({ children }: Props) {
     // Cargar banner persistente
     const savedBanner = localStorage.getItem("site_banner")
     if (savedBanner) setBannerUrl(savedBanner)
+
+    // Cargar logos persistentes
+    const savedLogoUni = localStorage.getItem("site_logo_uni")
+    if (savedLogoUni) setLogoUni(savedLogoUni)
+
+    const savedLogoEvento = localStorage.getItem("site_logo_evento")
+    if (savedLogoEvento) setLogoEvento(savedLogoEvento)
   }, [])
 
   const handleLogout = () => {
@@ -52,25 +61,23 @@ export default function Layout({ children }: Props) {
 
         <div className="logo-container">
           <img
-            src="/ucatolica-logo.png"
+            src={logoUni}
             alt="Logo Universidad Catolica"
-            width={160}
-            height={80}
+            className="logo-uni"
           />
           <img
-            src="/logo-coniiti.png"
+            src={logoEvento}
             alt="Logo Coniiti"
-            width={200}
-            height={50}
+            className="logo-event"
           />
         </div>
 
         <nav className="navbar">
           <ul className="navbar-links">
             <li><Link to="/">Inicio</Link></li>
-            <li><Link to="#invitados">Invitados</Link></li>
+            <li><Link to="/invitados">Invitados</Link></li>
             <li><Link to="/conferencias">Agenda</Link></li>
-            <li><Link to="#acerca-de">Acerca de</Link></li>
+            <li><a href="/#acerca-de">Acerca de</a></li>
             <li><Link to="#contacto">Contacto</Link></li>
           </ul>
 

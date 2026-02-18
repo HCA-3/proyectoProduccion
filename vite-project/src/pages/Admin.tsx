@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+﻿import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { conferences as initialConferences } from "../data/conference_mocks"
 
@@ -25,11 +25,11 @@ export default function Admin() {
                 navigate("/") // No tiene permisos
             }
         } else {
-            navigate("/registro") // No hay sesión
+            navigate("/registro") // No hay sesiÃ³n
         }
     }, [navigate])
 
-    // Persistencia automática de los cambios
+    // Persistencia automÃ¡tica de los cambios
     useEffect(() => {
         localStorage.setItem("site_conferences", JSON.stringify(conferences))
     }, [conferences])
@@ -40,7 +40,7 @@ export default function Admin() {
     const [editingConf, setEditingConf] = useState<any | null>(null)
 
     const handleDeleteConference = (id: string) => {
-        if (confirm("¿Estás seguro de mover esta conferencia a la papelera?")) {
+        if (confirm("Â¿EstÃ¡s seguro de mover esta conferencia a la papelera?")) {
             const confToDelete = conferences.find((c: any) => c.id === id)
             if (confToDelete) {
                 setDeletedConferences([...deletedConferences, confToDelete])
@@ -83,7 +83,7 @@ export default function Admin() {
             endTime: newConf.endTime || new Date().toISOString(),
             location: newConf.location,
             category: "General",
-            level: "Básico",
+            level: "BÃ¡sico",
             speaker: {
                 name: newConf.speakerName,
                 organization: "Por definir",
@@ -94,7 +94,7 @@ export default function Admin() {
         setConferences([...conferences, simulatedConf])
         setShowConfForm(false)
         setNewConf({ title: "", location: "", description: "", speakerName: "", startTime: "", endTime: "" })
-        alert("¡Conferencia agendada exitosamente!")
+        alert("Â¡Conferencia agendada exitosamente!")
     }
 
     const handleSaveEdit = (e: React.FormEvent) => {
@@ -134,13 +134,13 @@ export default function Admin() {
             endTime: new Date().toISOString(),
             location: "Pendiente",
             category: "General",
-            level: "Básico",
+            level: "BÃ¡sico",
             speaker: { ...newGuest }
         }
         setConferences([...conferences, simulatedConf])
         setShowGuestForm(false)
         setNewGuest({ name: "", organization: "", bio: "", avatar: "" })
-        alert("¡Invitado y foto cargados exitosamente!")
+        alert("Â¡Invitado y foto cargados exitosamente!")
     }
 
     if (!userRole) return <div className="loading">Cargando panel...</div>
@@ -148,8 +148,8 @@ export default function Admin() {
     return (
         <div className="admin-container fade-in">
             <div className="admin-header">
-                <h1>Panel de Gestión Superior</h1>
-                <p className="role-badge">{userRole === "SUPER_ADMIN" ? "Super Usuario 1: Acceso Total" : "Super Usuario 2: Gestión de Contenido"}</p>
+                <h1>Panel de GestiÃ³n Superior</h1>
+                <p className="role-badge">{userRole === "SUPER_ADMIN" ? "Super Usuario 1: Acceso Total" : "Super Usuario 2: GestiÃ³n de Contenido"}</p>
             </div>
 
             <div className="admin-grid">
@@ -158,26 +158,26 @@ export default function Admin() {
                         className={activeTab === "conferences" ? "active" : ""}
                         onClick={() => setActiveTab("conferences")}
                     >
-                        📋 Agenda de Conferencias
+                        ðŸ“‹ Agenda de Conferencias
                     </button>
                     <button
                         className={activeTab === "guests" ? "active" : ""}
                         onClick={() => setActiveTab("guests")}
                     >
-                        👥 Listado de Invitados
+                        ðŸ‘¥ Listado de Invitados
                     </button>
                     <button
                         className={activeTab === "trash" ? "active" : ""}
                         onClick={() => setActiveTab("trash")}
                     >
-                        🗑️ Papelera
+                        ðŸ—‘ï¸ Papelera
                     </button>
                     {userRole === "SUPER_ADMIN" && (
                         <button
                             className={activeTab === "settings" ? "active" : ""}
                             onClick={() => setActiveTab("settings")}
                         >
-                            ⚙️ Configuración de Página
+                            âš™ï¸ ConfiguraciÃ³n de PÃ¡gina
                         </button>
                     )}
                 </aside>
@@ -191,14 +191,14 @@ export default function Admin() {
                                     className="btn-add"
                                     onClick={() => setShowConfForm(!showConfForm)}
                                 >
-                                    {showConfForm ? "Cerrar Formulario" : "+ Añadir Nueva"}
+                                    {showConfForm ? "Cerrar Formulario" : "+ AÃ±adir Nueva"}
                                 </button>
                             </div>
 
                             {showConfForm && (
                                 <form className="add-guest-form fade-in" onSubmit={handleAddConference}>
                                     <div className="form-group">
-                                        <label>Título de la Conferencia</label>
+                                        <label>TÃ­tulo de la Conferencia</label>
                                         <input
                                             type="text"
                                             required
@@ -217,7 +217,7 @@ export default function Admin() {
                                             />
                                         </div>
                                         <div className="form-group">
-                                            <label>Ubicación (Salón / Auditorio)</label>
+                                            <label>UbicaciÃ³n (SalÃ³n / Auditorio)</label>
                                             <input
                                                 type="text"
                                                 required
@@ -227,7 +227,7 @@ export default function Admin() {
                                         </div>
                                     </div>
                                     <div className="form-group">
-                                        <label>Descripción / Resumen</label>
+                                        <label>DescripciÃ³n / Resumen</label>
                                         <textarea
                                             rows={3}
                                             required
@@ -242,9 +242,9 @@ export default function Admin() {
                             <table className="admin-table">
                                 <thead>
                                     <tr>
-                                        <th>Título</th>
+                                        <th>TÃ­tulo</th>
                                         <th>Ponente</th>
-                                        <th>Ubicación</th>
+                                        <th>UbicaciÃ³n</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -255,8 +255,8 @@ export default function Admin() {
                                             <td>{conf.speaker.name}</td>
                                             <td>{conf.location}</td>
                                             <td className="actions">
-                                                <button className="btn-edit-sm" onClick={() => handleEditConference(conf)}>✏️ Editar</button>
-                                                <button className="btn-delete-sm" onClick={() => handleDeleteConference(conf.id)}>🗑️ Borrar</button>
+                                                <button className="btn-edit-sm" onClick={() => handleEditConference(conf)}>âœï¸ Editar</button>
+                                                <button className="btn-delete-sm" onClick={() => handleDeleteConference(conf.id)}>ðŸ—‘ï¸ Borrar</button>
                                             </td>
                                         </tr>
                                     ))}
@@ -267,7 +267,7 @@ export default function Admin() {
                     {activeTab === "guests" && (
                         <div className="admin-view">
                             <div className="view-header">
-                                <h2>Gestión de Invitados</h2>
+                                <h2>GestiÃ³n de Invitados</h2>
                                 <button
                                     className="btn-add"
                                     onClick={() => setShowGuestForm(!showGuestForm)}
@@ -289,7 +289,7 @@ export default function Admin() {
                                             />
                                         </div>
                                         <div className="form-group">
-                                            <label>Organización / Universidad</label>
+                                            <label>OrganizaciÃ³n / Universidad</label>
                                             <input
                                                 type="text"
                                                 required
@@ -345,14 +345,14 @@ export default function Admin() {
 
                     {activeTab === "settings" && userRole === "SUPER_ADMIN" && (
                         <div className="admin-view">
-                            <h2>Configuración del Sitio</h2>
+                            <h2>ConfiguraciÃ³n del Sitio</h2>
                             <form className="settings-form">
                                 <div className="form-group">
                                     <label>Nombre del Evento</label>
                                     <input type="text" defaultValue="CONIITI 2026" />
                                 </div>
                                 <div className="form-group">
-                                    <label>Tema por País (Colores y Estilos)</label>
+                                    <label>Tema por PaÃ­s (Colores y Estilos)</label>
                                     <select
                                         defaultValue={localStorage.getItem("site_theme") || "default"}
                                         onChange={(e) => {
@@ -363,10 +363,10 @@ export default function Admin() {
                                         }}
                                         className="theme-select"
                                     >
-                                        <option value="default">Estándar (Universidad Católica)</option>
+                                        <option value="default">EstÃ¡ndar (Universidad CatÃ³lica)</option>
                                         <option value="colombia">Colombia (Amarillo, Azul y Rojo)</option>
                                         <option value="italy">Italia (Verde, Blanco y Rojo)</option>
-                                        <option value="mexico">México (Verde y Rojo)</option>
+                                        <option value="mexico">MÃ©xico (Verde y Rojo)</option>
                                     </select>
                                 </div>
                                 <div className="form-group">
@@ -385,7 +385,7 @@ export default function Admin() {
                                                 onClick={() => {
                                                     const val = (document.getElementById('bannerInput') as HTMLInputElement).value;
                                                     localStorage.setItem("site_banner", val);
-                                                    alert("Banner actualizado. Recarga la página para ver los cambios.");
+                                                    alert("Banner actualizado. Recarga la pÃ¡gina para ver los cambios.");
                                                 }}
                                             >
                                                 Actualizar Foto
@@ -405,13 +405,58 @@ export default function Admin() {
                                     </div>
                                 </div>
                                 <div className="form-group">
+                                                                    <div className="form-group">
+                                    <label>Logos de la Institución y Evento</label>
+                                    <div className="logos-edit-grid">
+                                        <div className="logo-upload-item">
+                                            <span>Logo Universidad</span>
+                                            <input 
+                                                type="file" 
+                                                accept="image/*"
+                                                onChange={(e) => {
+                                                    const file = e.target.files?.[0];
+                                                    if (file) {
+                                                        const reader = new FileReader();
+                                                        reader.onloadend = () => {
+                                                            if (reader.result) {
+                                                                localStorage.setItem("site_logo_uni", reader.result as string);
+                                                                alert("Logo de la Universidad cargado con éxito. Recarga para ver.");
+                                                            }
+                                                        };
+                                                        reader.readAsDataURL(file);
+                                                    }
+                                                }}
+                                            />
+                                        </div>
+                                        <div className="logo-upload-item">
+                                            <span>Logo CONIITI</span>
+                                            <input 
+                                                type="file" 
+                                                accept="image/*"
+                                                onChange={(e) => {
+                                                    const file = e.target.files?.[0];
+                                                    if (file) {
+                                                        const reader = new FileReader();
+                                                        reader.onloadend = () => {
+                                                            if (reader.result) {
+                                                                localStorage.setItem("site_logo_evento", reader.result as string);
+                                                                alert("Logo del Evento cargado con éxito. Recarga para ver.");
+                                                            }
+                                                        };
+                                                        reader.readAsDataURL(file);
+                                                    }
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
                                     <label>Modo de Mantenimiento</label>
                                     <input type="checkbox" />
                                 </div>
                                 <button
                                     type="button"
                                     className="btn-submit"
-                                    onClick={() => alert("Configuración global guardada correctamente")}
+                                    onClick={() => alert("ConfiguraciÃ³n global guardada correctamente")}
                                 >
                                     Guardar Cambios Globales
                                 </button>
@@ -425,12 +470,12 @@ export default function Admin() {
                                 <h2>Papelera de Reciclaje</h2>
                             </div>
                             {deletedConferences.length === 0 ? (
-                                <div className="no-data">La papelera está vacía</div>
+                                <div className="no-data">La papelera estÃ¡ vacÃ­a</div>
                             ) : (
                                 <table className="admin-table">
                                     <thead>
                                         <tr>
-                                            <th>Título</th>
+                                            <th>TÃ­tulo</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -443,7 +488,7 @@ export default function Admin() {
                                                         className="btn-edit-sm"
                                                         onClick={() => handleRestoreConference(conf.id)}
                                                     >
-                                                        🔄 Restaurar
+                                                        ðŸ”„ Restaurar
                                                     </button>
                                                 </td>
                                             </tr>
@@ -454,14 +499,14 @@ export default function Admin() {
                         </div>
                     )}
 
-                    {/* Modal de Edición de Conferencia */}
+                    {/* Modal de EdiciÃ³n de Conferencia */}
                     {editingConf && (
                         <div className="modal-overlay fade-in">
                             <div className="modal-content">
                                 <h3>Editar Conferencia</h3>
                                 <form onSubmit={handleSaveEdit}>
                                     <div className="form-group">
-                                        <label>Título</label>
+                                        <label>TÃ­tulo</label>
                                         <input
                                             type="text"
                                             value={editingConf.title}
@@ -469,7 +514,7 @@ export default function Admin() {
                                         />
                                     </div>
                                     <div className="form-group">
-                                        <label>Ubicación</label>
+                                        <label>UbicaciÃ³n</label>
                                         <input
                                             type="text"
                                             value={editingConf.location}
@@ -477,7 +522,7 @@ export default function Admin() {
                                         />
                                     </div>
                                     <div className="form-group">
-                                        <label>Descripción</label>
+                                        <label>DescripciÃ³n</label>
                                         <textarea
                                             rows={4}
                                             value={editingConf.description}
