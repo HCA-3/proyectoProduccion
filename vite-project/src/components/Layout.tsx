@@ -38,6 +38,19 @@ export default function Layout({ children }: Props) {
 
     const savedLogoEvento = localStorage.getItem("site_logo_evento")
     if (savedLogoEvento) setLogoEvento(savedLogoEvento)
+
+    // Aplicar colores personalizados si existen
+    const customBg = localStorage.getItem("custom_bg_color")
+    if (customBg) document.documentElement.style.setProperty('--site-bg', customBg)
+
+    const customText = localStorage.getItem("custom_text_color")
+    if (customText) document.documentElement.style.setProperty('--site-text', customText)
+
+    const customPrimary = localStorage.getItem("custom_primary_color")
+    if (customPrimary) document.documentElement.style.setProperty('--primary-color', customPrimary)
+
+    const customHeader = localStorage.getItem("custom_header_bg")
+    if (customHeader) document.documentElement.style.setProperty('--header-bg', customHeader)
   }, [])
 
   const handleLogout = () => {

@@ -34,7 +34,7 @@ export default function CountdownTimer() {
         <div className="countdown-container fade-in">
             <div className="countdown-item">
                 <span className="count-number">{timeLeft.days}</span>
-                <span className="count-label">DÃ­as</span>
+                <span className="count-label">Días</span>
             </div>
             <div className="countdown-item">
                 <span className="count-number">{timeLeft.hours}</span>

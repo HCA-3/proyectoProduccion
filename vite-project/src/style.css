@@ -1028,3 +1028,30 @@ footer {
 .logo-uni { height: 60px; width: auto; object-fit: contain; }
 .logo-event { height: 60px; width: auto; object-fit: contain; }
 @media (max-width: 600px) { .logos-edit-grid { grid-template-columns: 1fr; } .logo-uni, .logo-event { height: 40px; } }
+
+/* Variables de Personalización Dinámica */
+:root {
+  --site-bg: #ffffff;
+  --site-text: #1b1a1a;
+  --header-bg: #1f2a44;
+}
+
+body {
+  background-color: var(--site-bg);
+  color: var(--site-text);
+}
+
+header {
+  background-color: var(--header-bg) !important;
+}
+
+.color-picker-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; background: #f9f9f9; padding: 1rem; border-radius: 10px; border: 1px solid #ddd; }
+.color-item { display: flex; flex-direction: column; gap: 0.5rem; }
+.color-item span { font-size: 0.8rem; font-weight: 700; color: #555; }
+.color-item input[type='color'] { width: 100%; height: 40px; border: none; cursor: pointer; border-radius: 5px; }
+.hint { font-size: 0.75rem; color: #888; font-style: italic; margin-top: 0.5rem; }
+
+
+/* Aplicación extendida de variables de color */
+p, li, label, h3, h4 { color: inherit; }
+
