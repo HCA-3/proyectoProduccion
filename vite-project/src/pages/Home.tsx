@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { conferences as initialConferences } from "../data/conference_mocks"
+import CountdownTimer from "../components/CountdownTimer"
 
 export default function Home() {
     const [conferences] = useState(() => {
@@ -17,6 +18,7 @@ export default function Home() {
             <section className="hero-section">
                 <h1>Bienvenidos a CONIITI 2026</h1>
                 <p>Congreso Internacional de Innovación y Tendencias en Ingeniería</p>
+                <CountdownTimer />
             </section>
 
             <section id="invitados" className="invitados-section">
